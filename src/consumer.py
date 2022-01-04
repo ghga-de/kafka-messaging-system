@@ -28,8 +28,6 @@ def consume():
         "my-topic", group_id="my-group", bootstrap_servers=["10.5.0.1:9092"]
     )
     for message in consumer:
-        # message value and key are raw bytes -- decode if necessary!
-        # e.g., for unicode: `message.value.decode('utf-8')`
         print(
             f" topic: {message.topic} partition: {message.partition} "
             + f"offset: {message.offset} key: {message.key} value: {message.value} "
