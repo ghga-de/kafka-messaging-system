@@ -29,4 +29,4 @@ ENV PYTHONUNBUFFERED=1
 
 # Please adapt to package name:
 #ENTRYPOINT ["python /serivce/src/producer.py"]
-CMD ["python", "/service/src/producer.py"]
+#CMD ["python", "/service/src/producer.py"]
