@@ -25,8 +25,16 @@ def consume():
     consume
     """
     consumer = KafkaConsumer(
-        "my-topic", group_id="my-group", bootstrap_servers=["10.5.0.1:9092"]
+        "my-topic", 
+        group_id="my-group",
+        bootstrap_servers=["my-cluster-kafka-bootstrap:9092"],
+        security_protocol='SSL',
+        ssl_check_hostname=True,
+        ssl_cafile='/service/certs/ca.crt',
+        ssl_certfile='/service/certs/user.crt',
+        ssl_keyfile='/service/certs/user.key'
     )
+  
     for message in consumer:
         print(
             f" topic: {message.topic} partition: {message.partition} "

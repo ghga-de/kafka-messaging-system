@@ -18,6 +18,7 @@
 """
 
 import json
+import os
 
 from kafka import KafkaProducer
 
@@ -25,15 +26,24 @@ from kafka import KafkaProducer
 def produce():
     """
     produce
-    """
-    producer = KafkaProducer(
-        bootstrap_servers=["10.5.0.1:9092"],
-        value_serializer=lambda m: json.dumps(m).encode("ascii"),
-    )
+    """     
+    try:
+        producer = KafkaProducer(
+            bootstrap_servers=["my-cluster-kafka-bootstrap:9092"],
+            value_serializer=lambda m: json.dumps(m).encode("ascii"),
+            security_protocol='SSL',
+            ssl_check_hostname=True,
+            ssl_cafile='/service/certs/ca.crt',
+            ssl_certfile='/service/certs/user.crt',
+            ssl_keyfile='/service/certs/user.key'
+        )
+        for i in range(100):        
+         producer.send("my-topic", {i: i})
+         print('message published {0}'.format(i))       
 
-    for i in range(100):
-        producer.send("my-topic", {i: i})
-        print(f"message published {i}")
+    except Exception as e:
+        # ... PRINT THE ERROR MESSAGE ... #
+         print(e)     
 
 
 if __name__ == "__main__":

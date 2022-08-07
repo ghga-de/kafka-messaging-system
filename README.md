@@ -32,3 +32,8 @@ To start a consumer, in another terminal
 
     cd src/
     python consumer.py
+    
+To run producer and consumer in k8s
+    kubectl -n data-portal run kafka-messaging-system -ti --image=docker.io/ghga/kafka-messaging-system:0.0.0-8-6b17b45-main --rm=true --restart=Never -- python ../../service/src/producer.py 
+
+    kubectl -n data-portal run kafka-messaging-system -ti --image=docker.io/ghga/kafka-messaging-system:0.0.0-8-6b17b45-main --rm=true --restart=Never -- python ../../service/src/consumer.py 
