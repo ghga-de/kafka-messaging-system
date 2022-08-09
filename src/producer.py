@@ -18,8 +18,7 @@
 """
 
 import json
-from multiprocessing.connection import wait
-import os
+from time import sleep
 
 from kafka import KafkaProducer
 
@@ -51,4 +50,4 @@ def produce():
 if __name__ == "__main__":
     while True:        
         produce()
-        wait(60)
+        sleep(60)
