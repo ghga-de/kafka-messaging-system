@@ -53,7 +53,7 @@ metadata:
 spec:
      containers:
      - name: kafka-producer
-       image: ghga/kafka-messaging-system:0.0.0-16-4a10e21-main     
+       image: ghga/kafka-messaging-system:0.0.0-18-da3bc2c-main     
        volumeMounts:
        - name: secret-volume
          mountPath: /data/crt  
@@ -77,12 +77,12 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    purpose: kafka-producer
-  name: kafka-producer
+    purpose: kafka-consumer
+  name: kafka-consumer
 spec:
      containers:
      - name: kafka-producer
-       image: ghga/kafka-messaging-system:0.0.0-16-4a10e21-main     
+       image: ghga/kafka-messaging-system:0.0.0-18-da3bc2c-main     
        volumeMounts:
        - name: secret-volume
          mountPath: /data/crt  
