@@ -18,6 +18,7 @@
 """
 
 import json
+from multiprocessing.connection import wait
 import os
 
 from kafka import KafkaProducer
@@ -28,7 +29,7 @@ def produce():
     produce
     """     
     try:
-             
+
         producer = KafkaProducer(
             bootstrap_servers=["my-cluster-kafka-bootstrap:9093"],
             value_serializer=lambda m: json.dumps(m).encode("ascii"),
@@ -48,4 +49,6 @@ def produce():
 
 
 if __name__ == "__main__":
-    produce()
+    while True:        
+        produce()
+        wait(60)
