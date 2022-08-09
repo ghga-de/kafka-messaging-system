@@ -44,12 +44,60 @@ To start a consumer, in another terminal
     
 To run producer and consumer in k8s
 
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    purpose: kafka-producer
+  name: kafka-producer
+spec:
+     containers:
+     - name: kafka-producer
+       image: ghga/kafka-messaging-system:0.0.0-16-4a10e21-main     
+       volumeMounts:
+       - name: secret-volume
+         mountPath: /data/crt  
+       - name: user-secret-volume
+         mountPath: /data/usercrt      
+       command: ["python"]
+       args: ["/service/src/producer.py"]
+       restartPolicy: OnFailure
+     volumes:
+     - name: secret-volume
+       secret:
+         secretName: my-cluster-cluster-ca-cert
+     - name: user-secret-volume
+       secret:
+         secretName: my-user
+    
+    
+To run consumer in k8s
 
-    kubectl -n data-portal run kafka-messaging-system -ti --image=docker.io/ghga/kafka-messaging-system:0.0.0-8-6b17b45-main --rm=true --restart=Never -- python ../../service/src/producer.py 
-    
-    
-    kubectl -n data-portal run kafka-messaging-system -ti --image=docker.io/ghga/kafka-messaging-system:0.0.0-8-6b17b45-main --rm=true --restart=Never -- python ../../service/src/consumer.py
-    
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    purpose: kafka-producer
+  name: kafka-producer
+spec:
+     containers:
+     - name: kafka-producer
+       image: ghga/kafka-messaging-system:0.0.0-16-4a10e21-main     
+       volumeMounts:
+       - name: secret-volume
+         mountPath: /data/crt  
+       - name: user-secret-volume
+         mountPath: /data/usercrt      
+       command: ["python"]
+       args: ["/service/src/consumer.py"]
+       restartPolicy: OnFailure
+     volumes:
+     - name: secret-volume
+       secret:
+         secretName: my-cluster-cluster-ca-cert
+     - name: user-secret-volume
+       secret:
+         secretName: my-user
     
     
 
