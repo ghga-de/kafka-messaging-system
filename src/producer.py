@@ -28,14 +28,23 @@ def produce():
     produce
     """     
     try:
+        # producer = KafkaProducer(
+        #     bootstrap_servers=["my-cluster-kafka-bootstrap:9093"],
+        #     value_serializer=lambda m: json.dumps(m).encode("ascii"),
+        #     security_protocol='SSL',
+        #     ssl_check_hostname=True,
+        #     ssl_cafile='/service/certs/ca.crt',
+        #     ssl_certfile='/service/certs/user.crt',
+        #     ssl_keyfile='/service/certs/user.key'
+        # )
         producer = KafkaProducer(
             bootstrap_servers=["my-cluster-kafka-bootstrap:9093"],
             value_serializer=lambda m: json.dumps(m).encode("ascii"),
             security_protocol='SSL',
             ssl_check_hostname=True,
-            ssl_cafile='/service/certs/ca.crt',
-            ssl_certfile='/service/certs/user.crt',
-            ssl_keyfile='/service/certs/user.key'
+            ssl_cafile='/data/crt/ca.crt',
+            ssl_certfile='/data/usercrt/user.crt',
+            ssl_keyfile='/data/usercrt/user.key'
         )
         for i in range(100):        
          producer.send("my-topic", {i: i})
