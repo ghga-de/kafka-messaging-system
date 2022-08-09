@@ -19,6 +19,15 @@
 
 This project demonstrates some features of the Apache Kafka system. It is implemented using the kafka-python library for python.
 
+# Dependencies
+## Requirments 
+
+Requires Python 3 and pip3
+
+### install packages 
+```
+pip install -r requirements.txt
+```
 
 To start a producer, open a new terminal
 
@@ -37,8 +46,10 @@ To run producer and consumer in k8s
 
 
     kubectl -n data-portal run kafka-messaging-system -ti --image=docker.io/ghga/kafka-messaging-system:0.0.0-8-6b17b45-main --rm=true --restart=Never -- python ../../service/src/producer.py 
+    
+    
     kubectl -n data-portal run kafka-messaging-system -ti --image=docker.io/ghga/kafka-messaging-system:0.0.0-8-6b17b45-main --rm=true --restart=Never -- python ../../service/src/consumer.py
     
     
     
-    
+
