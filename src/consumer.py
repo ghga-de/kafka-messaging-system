@@ -27,7 +27,7 @@ def consume():
     consumer = KafkaConsumer(
         "my-topic", 
         group_id="my-group",
-        bootstrap_servers=["my-cluster-kafka-bootstrap:9093"],
+        bootstrap_servers=["kafka-kafka-bootstrap:9093"],
         security_protocol='SSL',
         ssl_check_hostname=True,
         ssl_cafile='/data/crt/ca.crt',
