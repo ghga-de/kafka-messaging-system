@@ -30,7 +30,7 @@ def produce():
     try:
 
         producer = KafkaProducer(
-            bootstrap_servers=["my-cluster-kafka-bootstrap:9093"],
+            bootstrap_servers=["kafka-kafka-bootstrap:9093"],
             value_serializer=lambda m: json.dumps(m).encode("ascii"),
             security_protocol='SSL',
             ssl_check_hostname=True,
